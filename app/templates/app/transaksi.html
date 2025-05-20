@@ -1,0 +1,35 @@
+<h2>Daftar Transaksi</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Nama Klien</th>
+    <th>Tanggal</th>
+  </tr>
+  {% for row in data %}
+    <tr>
+      <td>{{ row.nama_klien }}</td>
+      <td>{{ row.tanggal }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="2">Tidak ada data</td></tr>
+  {% endfor %}
+</table>
+
+<h3>Filter Data</h3>
+<form method="get">
+  <label>Nama Klien:</label>
+  <select name="nama_klien" onchange="this.form.submit()">
+    <option value="">-- Semua Klien --</option>
+    {% for klien in semua_klien %}
+      <option value="{{ klien }}" {% if klien == selected_klien %}selected{% endif %}>{{ klien }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Tanggal:</label>
+  <select name="tanggal" onchange="this.form.submit()">
+    <option value="">-- Semua Tanggal --</option>
+    {% for tgl in tanggal_tersedia %}
+      <option value="{{ tgl }}" {% if tgl == selected_tanggal %}selected{% endif %}>{{ tgl }}</option>
+    {% endfor %}
+  </select>
+</form>
